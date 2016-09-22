@@ -5,10 +5,10 @@
 #include <iostream>
 #include "Error_code.hpp"
 #define MAX 301
+// the max number of the content is 300
 
 typedef char Queue_entry;
 
-// the max number of the content is 300
 class Queue {
  public:
   Queue();

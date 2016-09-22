@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]) {
   Stack s;
   Queue q;
   std::cin >> choice;
+
   if (choice == 1) {
     char standard[] = {'C', 'O', 'M', 'P', 'U', 'T', 'E', 'R'};
     for (unsigned int i = 0; i < strlen(standard); ++i) {
@@ -76,5 +77,6 @@ int main(int argc, char const *argv[]) {
       }
     }
   }
+
   return 0;
 }

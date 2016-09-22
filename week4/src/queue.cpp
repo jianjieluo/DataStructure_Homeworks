@@ -1,4 +1,5 @@
 #include "Queue.hpp"
+/*本队列使用的是循环队列，通过给出一个空的位来区分队列满和队列空的情况*/
 
 Queue::Queue() : front(0), rear(-1) { memset(buffer, 0, MAX); }
 
