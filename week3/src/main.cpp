@@ -2,11 +2,14 @@
 #include "Stack.hpp"
 
 void help() {
+  system("clear");
   std::cout << "----------------Welcome!!----------------" << std::endl;
   std::cout << "0 display the help menu" << std::endl;
+  std::cout << "-----------------------------------------" << std::endl;
   std::cout << "1 push an element into the stack" << std::endl;
   std::cout << "2 pop an element from the stack" << std::endl;
   std::cout << "3 display the current stack" << std::endl;
+  std::cout << "-----------------------------------------" << std::endl;
   std::cout << "4 push an element into the queue" << std::endl;
   std::cout << "5 pop an element from the queue" << std::endl;
   std::cout << "6 display the current stack" << std::endl;
@@ -45,28 +48,28 @@ int main(int argc, char const *argv[]) {
         case 1:
           std::cout << "Input a data:" << std::endl;
           std::cin >> data;
-          std::cout << s.push(data) << std::endl;
+          std::cout << "The Error code is :" << s.push(data) << std::endl;
           break;
         case 2:
           std::cout << "Pop a data:" << std::endl;
-          std::cout << s.pop() << std::endl;
+          std::cout << "The Error code is :" << s.pop() << std::endl;
           break;
         case 3:
           std::cout << "Display my stack:" << std::endl;
-          std::cout << s.display() << std::endl;
+          std::cout << "The Error code is :" << s.display() << std::endl;
           break;
         case 4:
           std::cout << "Input a data:" << std::endl;
           std::cin >> data;
-          std::cout << q.push(data) << std::endl;
+          std::cout << "The Error code is :" << q.push(data) << std::endl;
           break;
         case 5:
           std::cout << "Pop a data:" << std::endl;
-          std::cout << q.pop() << std::endl;
+          std::cout << "The Error code is :" << q.pop() << std::endl;
           break;
         case 6:
           std::cout << "Display my queue:" << std::endl;
-          std::cout << q.display() << std::endl;
+          std::cout << "The Error code is :" << q.display() << std::endl;
           break;
         default:
           break;

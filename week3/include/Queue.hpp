@@ -13,6 +13,8 @@ class Queue {
  public:
   Queue();
   ~Queue();
+  bool full() const;
+  bool empty() const;
   Error_code push(const Queue_entry data);
   Error_code pop();
   Error_code display() const;
