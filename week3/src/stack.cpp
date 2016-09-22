@@ -4,7 +4,7 @@ Stack::~Stack() { clear(); }
 
 bool Stack::empty() const { return m_size == 0; }
 
-Error_code1 Stack::top() const {
+Error_code Stack::top() const {
   if (empty()) {
     return underflow;
   } else {
@@ -13,7 +13,7 @@ Error_code1 Stack::top() const {
   }
 }
 
-Error_code1 Stack::push(const Stack_entry data) {
+Error_code Stack::push(const Stack_entry data) {
   try {
     if (m_top == nullptr) {
       m_top = new Node(data, nullptr);
@@ -28,7 +28,7 @@ Error_code1 Stack::push(const Stack_entry data) {
   return success;
 }
 
-Error_code1 Stack::pop() {
+Error_code Stack::pop() {
   if (empty())
     return underflow;
   else {
@@ -48,7 +48,7 @@ void Stack::clear() {
   }
 }
 
-Error_code1 Stack::display() const {
+Error_code Stack::display() const {
   Node* ptr = m_top;
   while (ptr != nullptr) {
     std::cout << ptr->data << " ";

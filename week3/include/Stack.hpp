@@ -1,8 +1,10 @@
+#ifndef STACK_HPP_
+#define STACK_HPP_
 #include <cstring>
 #include <iostream>
+#include "Error_code.hpp"
 
 typedef char Stack_entry;
-enum Error_code1 { success, fail, overflow, underflow };
 
 struct Node {
   Stack_entry data;
@@ -15,10 +17,10 @@ class Stack {
   Stack() : m_top(nullptr), m_size(0) {}
   ~Stack();
   bool empty() const;
-  Error_code1 top() const;
-  Error_code1 push(const Stack_entry data);
-  Error_code1 pop();
-  Error_code1 display() const;
+  Error_code top() const;
+  Error_code push(const Stack_entry data);
+  Error_code pop();
+  Error_code display() const;
   int size() const;
   void clear();
 
@@ -26,3 +28,5 @@ class Stack {
   Node* m_top;
   int m_size;
 };
+
+#endif
