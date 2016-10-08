@@ -20,10 +20,9 @@ void put(int ptotal, const int T, unsigned int index,
       put(ctotal, T, index + 1, vec, result);
     } else if (ctotal == T) {
       display(result);
-    } else {
-      result.pop_back();
-      put(ptotal, T, index + 1, vec, result);
     }
+    result.pop_back();
+    put(ptotal, T, index + 1, vec, result);
   }
 }
 
@@ -34,10 +33,13 @@ int main(int argc, char const* argv[]) {
   while (std::cin >> temp) {
     vec.push_back(temp);
   }
-  for (unsigned int i = 0; i < vec.size(); ++i) {
-    std::vector<int> res;
-    put(0, T, i, vec, res);
-  }
+  // int count = 0;
+  // for (unsigned int i = 0; i < vec.size(); ++i) {
+  std::vector<int> res;
+  // std::cout << ++count << std::endl;
+  // put(vec[i], T, i, vec, res);
+  put(0, T, 0, vec, res);
+  // }
 
   return 0;
 }
