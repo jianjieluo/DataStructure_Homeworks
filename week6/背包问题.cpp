@@ -2,6 +2,10 @@
 #include <stack>
 #include <vector>
 
+/**
+ * To display the correct result
+ * @param result the vector that store the correct answer
+ */
 inline void display(const std::vector<int>& result) {
   for (const auto& per : result) {
     std::cout << per << " ";
@@ -9,6 +13,16 @@ inline void display(const std::vector<int>& result) {
   std::cout << std::endl;
 }
 
+/**
+ * a rescusive function to solve the package problem
+ * @param ptotal the previous weight the package has taken in
+ * @param T      the standard weight
+ * @param index  the position that the current thing that is going to be put in
+ * the package
+ * @param vec    a vector stored all the things that can be put into the package
+ * @param result a vector to store the things that have been put into the
+ * package
+ */
 void put(int ptotal, const int T, unsigned int index,
          const std::vector<int>& vec, std::vector<int>& result) {
   if (index == vec.size()) {
@@ -29,17 +43,17 @@ void put(int ptotal, const int T, unsigned int index,
 int main(int argc, char const* argv[]) {
   int T, temp;
   std::cin >> T;
+
+  // initialize the original things that can be put into the package
   std::vector<int> vec;
+  std::cout << "Please end the input using EOF" << std::endl;
   while (std::cin >> temp) {
     vec.push_back(temp);
   }
-  // int count = 0;
-  // for (unsigned int i = 0; i < vec.size(); ++i) {
+
+  std::cout << "The correct results can be listed below" << std::endl;
   std::vector<int> res;
-  // std::cout << ++count << std::endl;
-  // put(vec[i], T, i, vec, res);
   put(0, T, 0, vec, res);
-  // }
 
   return 0;
 }
