@@ -15,14 +15,20 @@ void handle(const std::string& test) {
   }
   if (isBlank) return;
 
-  // 完善它的长度是单数的情况
-  if (len % 2 != 0) ++len;
-
-  for (int i = len / 2 - 1; i >= 0; --i) {
-    std::cout << test[i];
-  }
-  for (int i = len - 1; i >= len / 2; --i) {
-    std::cout << test[i];
+  if (len % 2 == 0) {
+    for (int i = len / 2 - 1; i >= 0; --i) {
+      std::cout << test[i];
+    }
+    for (int i = len - 1; i >= len / 2; --i) {
+      std::cout << test[i];
+    }
+  } else {
+    for (int i = len / 2; i >= 0; --i) {
+      std::cout << test[i];
+    }
+    for (int i = len - 1; i > len / 2; --i) {
+      std::cout << test[i];
+    }
   }
   std::cout << std::endl;
 }
@@ -35,18 +41,9 @@ int main(int argc, char const* argv[]) {
     v.push_back(test);
   }
 
-  // std::cout << v.size() << std::endl;
-  if (v.size() < 2) {
-    handle(v[0]);
-  } else {
-    for (unsigned int i = 0; i < v.size() - 1; i += 2) {
-      handle(v[i + 1]);
-      handle(v[i]);
-    }
-    // if (v.size() % 2 != 0) {
-    //   handle(v.back());
-    // }
+  for (unsigned int i = 0; i < v.size() - 1; i += 2) {
+    handle(v[i + 1]);
+    handle(v[i]);
   }
-
   return 0;
 }
