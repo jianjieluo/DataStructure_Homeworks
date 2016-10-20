@@ -5,18 +5,33 @@
 
 using namespace std;
 
-bool isRight(const string& lhs, const string& rhs) {
-  if (lhs.length() != rhs.length()) return false;
-  const char* a = lhs.c_str();
-  const char* b = rhs.c_str();
+bool isRight(string& lhs, string& rhs) {
   for (unsigned int i = 0; i < lhs.length(); ++i) {
-    int temp = a[i] + b[i];
-    // cout << a[i] << b[i];
-    if (temp != 149 && temp != 138) {
-      return false;
+    if (lhs[i] == 'A') {
+      lhs[i] = 'T';
+    }
+    if (lhs[i] == 'T') {
+      lhs[i] = 'A';
+    }
+    if (lhs[i] == 'C') {
+      lhs[i] = 'G';
+    }
+    if (lhs[i] == 'G') {
+      lhs[i] = 'C';
     }
   }
-  return true;
+  return (lhs == rhs);
+  // if (lhs.length() != rhs.length()) return false;
+  // const char* a = lhs.c_str();
+  // const char* b = rhs.c_str();
+  // for (unsigned int i = 0; i < lhs.length(); ++i) {
+  //   int temp = a[i] + b[i];
+  //   // cout << a[i] << b[i];
+  //   if (temp != 149 && temp != 138) {
+  //     return false;
+  //   }
+  // }
+  // return true;
 }
 
 int main(int argc, char const* argv[]) {
@@ -45,6 +60,8 @@ int main(int argc, char const* argv[]) {
           ++count;
           color[i] = true;
           color[j] = true;
+          // 重点，找到了一对之后两个都要进行改变。
+          break;
         }
       }
     }
