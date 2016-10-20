@@ -5,33 +5,17 @@
 
 using namespace std;
 
-bool isRight(string& lhs, string& rhs) {
+bool isRight(const string& lhs, const string& rhs) {
+  if (lhs.length() != rhs.length()) return false;
+  const char* a = lhs.c_str();
+  const char* b = rhs.c_str();
   for (unsigned int i = 0; i < lhs.length(); ++i) {
-    if (lhs[i] == 'A') {
-      lhs[i] = 'T';
-    }
-    if (lhs[i] == 'T') {
-      lhs[i] = 'A';
-    }
-    if (lhs[i] == 'C') {
-      lhs[i] = 'G';
-    }
-    if (lhs[i] == 'G') {
-      lhs[i] = 'C';
+    int temp = a[i] + b[i];
+    if (temp != 149 && temp != 138) {
+      return false;
     }
   }
-  return (lhs == rhs);
-  // if (lhs.length() != rhs.length()) return false;
-  // const char* a = lhs.c_str();
-  // const char* b = rhs.c_str();
-  // for (unsigned int i = 0; i < lhs.length(); ++i) {
-  //   int temp = a[i] + b[i];
-  //   // cout << a[i] << b[i];
-  //   if (temp != 149 && temp != 138) {
-  //     return false;
-  //   }
-  // }
-  // return true;
+  return true;
 }
 
 int main(int argc, char const* argv[]) {
