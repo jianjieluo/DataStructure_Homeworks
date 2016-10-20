@@ -1,48 +1,38 @@
-#include <cmath>
 #include <cstring>
 #include <iostream>
 #include <string>
 #include <vector>
 
-inline bool isNum(const char ch) { return (ch >= '0' && ch <= '9'); }
+using namespace std;
 
-int getLen(const std::vector<int>& v) {
-  int n = v.size();
-  int times = 0;
-  for (int i = 0; i < n; ++i) {
-    times += v[i] * pow(10, n - 1 - i);
-  }
-  return times;
+bool isDouble(const int lhs, const int rhs) {
+  return ((lhs == 2 * rhs) || (rhs == 2 * lhs));
 }
 
 int main(int argc, char const* argv[]) {
-  std::string str;
-  while (1) {
-    std::cin >> str;
-    if (str == "XXX") break;
+  int n;
+  cin >> n;
+  std::vector<int> v;
+  while (n--) {
+    v.clear();
+    int m;
+    std::cin >> m;
+    for (int i = 0; i < m; ++i) {
+      int temp;
+      std::cin >> temp;
+      v.push_back(temp);
+    }
 
-    unsigned int strLen = str.size();
-    for (unsigned int i = 0; i < strLen; ++i) {
-      if (!isNum(str[i])) {
-        std::cout << str[i];
-      } else {
-        std::vector<int> len;
-        for (unsigned int j = i; j < strLen; ++j) {
-          if (isNum(str[j])) {
-            len.push_back(str[j] - '0');
-          } else {
-            break;
-          }
+    int count = 0;
+    int vLen = v.size();
+    for (int i = 0; i < vLen - 1; ++i) {
+      for (int j = i + 1; j < vLen; ++j) {
+        if (isDouble(v[i], v[j])) {
+          ++count;
         }
-
-        int times = getLen(len);
-        for (int j = 1; j < times; ++j) {
-          std::cout << str[i - 1];
-        }
-        i = i + len.size() - 1;
       }
     }
-    std::cout << std::endl;
+    std::cout << count << std::endl;
   }
   return 0;
 }
