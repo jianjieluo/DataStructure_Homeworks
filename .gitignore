@@ -33,5 +33,6 @@
 
 bin/
 build/
+try/
 main
 *.pdf
