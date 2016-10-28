@@ -7,11 +7,13 @@ typedef char Element_type;
 
 struct Node {
   Element_type data;
+  int floor;
   Node* lchild;
   Node* rchild;
 
-  Node(Element_type _data, Node* _lhs = nullptr, Node* _rhs = nullptr)
-      : data(_data), lchild(_lhs), rchild(_rhs) {}
+  Node(Element_type _data, int _floor, Node* _lhs = nullptr,
+       Node* _rhs = nullptr)
+      : data(_data), floor(_floor), lchild(_lhs), rchild(_rhs) {}
 };
 
 class binaryTree {

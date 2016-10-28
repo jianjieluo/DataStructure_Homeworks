@@ -28,7 +28,7 @@ Node* binaryTree::search(Node* ptr, const Element_type& t_data) const {
 Error_code binaryTree::insert(const Element_type& child_data,
                               const Element_type& parent_data, bool isLeft) {
   if (empty()) {
-    m_root = new Node(child_data);
+    m_root = new Node(child_data, 1);
     ++m_size;
     return success;
   }
@@ -41,7 +41,7 @@ Error_code binaryTree::insert(const Element_type& child_data,
       if (parent->lchild != nullptr)
         return not_null;
       else {
-        parent->lchild = new Node(child_data);
+        parent->lchild = new Node(child_data, parent->floor + 1);
         m_size++;
         return success;
       }
@@ -49,7 +49,7 @@ Error_code binaryTree::insert(const Element_type& child_data,
       if (parent->rchild != nullptr) {
         return not_null;
       } else {
-        parent->rchild = new Node(child_data);
+        parent->rchild = new Node(child_data, parent->floor + 1);
         ++m_size;
         return success;
       }
@@ -82,8 +82,9 @@ void binaryTree::display() const { show(m_root); }
 
 void binaryTree::show(const Node* ptr) const {
   if (ptr == nullptr) return;
-  if (ptr != m_root) {
-    printf("    ");
+  int t_floor = ptr->floor;
+  while (--t_floor) {
+    std::cout << "    ";
   }
   std::cout << ptr->data << std::endl;
 
