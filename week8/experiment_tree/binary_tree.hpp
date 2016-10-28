@@ -21,7 +21,7 @@ class binaryTree {
   int m_size;
   Node* m_root;
   Node* search(Node* ptr, const Element_type& t_data) const;
-  void show(const Node* ptr) const;
+  void show(const Node* ptr, bool isLeft) const;
 
  public:
   binaryTree();

@@ -78,16 +78,22 @@ void binaryTree::invert(Node* parent) {
   }
 }
 
-void binaryTree::display() const { show(m_root); }
+void binaryTree::display() const { show(m_root, 1); }
 
-void binaryTree::show(const Node* ptr) const {
+void binaryTree::show(const Node* ptr, bool isLeft) const {
   if (ptr == nullptr) return;
   int t_floor = ptr->floor;
   while (--t_floor) {
     std::cout << "    ";
   }
+
+  if (isLeft)
+    std::cout << "l:";
+  else
+    std::cout << "r:";
+
   std::cout << ptr->data << std::endl;
 
-  show(ptr->lchild);
-  show(ptr->rchild);
+  show(ptr->lchild, 1);
+  show(ptr->rchild, 0);
 }
