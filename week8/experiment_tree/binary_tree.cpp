@@ -27,12 +27,18 @@ Node* binaryTree::search(Node* ptr, const Element_type& t_data) const {
 
 Error_code binaryTree::insert(const Element_type& child_data,
                               const Element_type& parent_data, bool isLeft) {
+  if (empty()) {
+    m_root = new Node(child_data);
+    ++m_size;
+    return success;
+  }
+
   Node* parent = find(parent_data);
-  if (parent) {
+  if (!parent) {
     return no_parent;
   } else {
     if (isLeft) {
-      if (parent->lchild == nullptr)
+      if (parent->lchild != nullptr)
         return not_null;
       else {
         parent->lchild = new Node(child_data);
@@ -40,7 +46,7 @@ Error_code binaryTree::insert(const Element_type& child_data,
         return success;
       }
     } else {
-      if (parent->rchild == nullptr) {
+      if (parent->rchild != nullptr) {
         return not_null;
       } else {
         parent->rchild = new Node(child_data);
@@ -61,7 +67,7 @@ void binaryTree::remove(Node* t_root) {
   --m_size;
 }
 
-void invert(Node* parent) {
+void binaryTree::invert(Node* parent) {
   // 如果需要提高效率的话，可以在这个if中间加上排除叶节点的情况
   if (parent == nullptr) {
     return;

@@ -32,7 +32,9 @@ class binaryTree {
   void remove(Node* t_root);
   void display() const;
   bool empty() const { return m_root == nullptr; }
-  void invert();
+  void invert(Node* parent);
+  void invert() { this->invert(m_root); }
+  void clear() { remove(m_root); }
 };
 
 #endif
