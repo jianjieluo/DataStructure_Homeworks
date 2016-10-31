@@ -1,15 +1,26 @@
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
+#include <list>
 #include <map>
-#include <vector>
 
-int main(int argc, char const *argv[]) {
+struct Node {
+  int weight;
+  int height;
+  Node* left;
+  Node* right;
+  Node* parent;
+
+  Node(int _w, int _h, Node* _l = NULL, Node* _r = NULL, Node* _p = NULL)
+      : weight(_w), height(_h), left(_l), right(_r), parent(_p) {}
+};
+
+int main(int argc, char const* argv[]) {
   int n;
   scanf("%d", &n);
   std::map<char, int> m;
   std::map<char, int>::iterator iter;
-  std::vector<int> v;
+  std::list<int> li;
   while (n--) {
     char ch;
     std::cin >> ch;
@@ -27,23 +38,27 @@ int main(int argc, char const *argv[]) {
     }
   }
 
-  v.clear();
+  li.clear();
   for (iter = m.begin(); iter != m.end(); ++iter) {
-    v.push_back(iter->second);
-  }
-  std::sort(v.begin(), v.end());
-  std::reverse(v.begin(), v.end());
-
-  int len = v.size();
-  int sum = 0;
-  for (int i = 0; i < len; ++i) {
-    sum += (i + 1) * v[i];
+    li.push_back(iter->second);
   }
 
-  if (len > 1) {
-    sum -= v[len - 1];
+  if (li.empty()) {
+    printf("0\n");
+    return 0;
+  }
+  if (li.size() == 1) {
+    printf("%d\n", li.front());
+    return 0;
   }
 
-  printf("%d\n", sum);
+  while (li.size() > 1) {
+    std::sort(li.begin(), li.end());
+    int lhs = li.front();
+    li.pop_front();
+    int rhs = li.front();
+    li.pop_front();
+  }
+
   return 0;
 }
