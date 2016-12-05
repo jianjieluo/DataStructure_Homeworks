@@ -1,54 +1,44 @@
 #include <cstdio>
 #include <iostream>
-#include <list>
 #include <map>
+#include <queue>
+#include <string>
 #include <vector>
-
-// try to use a vector to store the path and when find the right node, do it.
 
 struct Node {
   int weight;
+  std::string path;
   char ch;
-  int path;
-  int height;
   Node* left;
   Node* right;
 
-  Node(int _w, char _ch = 'a', int _p = 0, Node* _l = NULL, Node* _r = NULL)
-      : weight(_w), ch(_ch), path(_p), left(_l), right(_r) {}
+  Node(int _w, std::string _p, char _ch = 'a', Node* _l = NULL, Node* _r = NULL)
+      : weight(_w), path(_p), ch(_ch), left(_l), right(_r) {}
 };
 
 Node** arr = new Node*[101];
-std::vector<int> path;
 
-// void showPath(Node* ptr) {
-//   if (ptr == NULL) return;
-//   std::cout << ptr->path;
-//
-//   showPath(ptr->right);
-//   showPath(ptr->left);
-// }
+void bfs_travel(Node* root) {
+  if (root == NULL) return;
+  std::queue<Node*> q;
+  q.push(root);
 
-void travel(Node* ptr) {
-  if (ptr == NULL) return;
+  while (!q.empty()) {
+    Node* curr = q.front();
+    q.pop();
 
-  path.push_back(ptr->path);
-
-  if (ptr->left == NULL && ptr->right == NULL) {
-    std::cout << ptr->ch << " " << ptr->weight << " ";
-    for (std::vector<int>::iterator it = path.begin() + 1; it != path.end();
-         ++it) {
-      //   if (it != path.begin()) {
-      //     printf(" ");
-      //   }
-      printf("%d", *it);
+    if (curr->left == NULL && curr->right == NULL) {
+      std::cout << curr->ch << " " << curr->weight << " " << curr->path
+                << std::endl;
+    } else {
+      if (curr->left != NULL) {
+        q.push(curr->left);
+      }
+      if (curr->right != NULL) {
+        q.push(curr->right);
+      }
     }
-    printf("\n");
-    path.pop_back();
   }
-
-  travel(ptr->right);
-  travel(ptr->left);
 }
 
 int main(int argc, char const* argv[]) {
@@ -79,14 +69,10 @@ int main(int argc, char const* argv[]) {
   }
 
   int index = 0;
+  std::string empty_path = "";
   for (iter = m.begin(); iter != m.end(); ++iter) {
-    arr[index] = new Node(iter->second, iter->first);
+    arr[index] = new Node(iter->second, empty_path, iter->first);
     ++index;
-  }
-
-  if (arr[0] == NULL) {
-    printf("0\n");
-    return 0;
   }
 
   // create huffman tree
@@ -103,20 +89,16 @@ int main(int argc, char const* argv[]) {
 
     Node* n1 = arr[index - 2];
     Node* n2 = arr[index - 1];
-    Node* newNode = new Node(n1->weight + n2->weight);
+    Node* newNode = new Node(n1->weight + n2->weight, empty_path);
     newNode->right = n1;
     newNode->left = n2;
-    n1->path = 1;
-    n2->path = 0;
+    n1->path += "1";
+    n2->path += "0";
 
     arr[index - 2] = newNode;
   }
 
-  travel(arr[0]);
-
-  for (int i = 0; i < len; ++i) {
-    delete[] arr[i];
-  }
-  delete[] arr;
+  // begin to travel the tree
+  bfs_travel(arr[0]);
   return 0;
 }
