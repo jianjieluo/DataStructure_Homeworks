@@ -1,8 +1,9 @@
 #include <cstdio>
+#include <cstdlib>
 #define MAX 10000000
 using namespace std;
 
-int p[MAX] = {0};
+int a[MAX] = {0};
 bool flag[MAX] = {false};
 
 void swap(int& a, int& b) {
@@ -12,30 +13,27 @@ void swap(int& a, int& b) {
     b = temp;
 }
 
-int partition(int* a, int n) {
-    int i = -1;
-    for (int j = 0; j < n; ++j) {
-        if (a[j] < a[n-1]) {
+int partition(int lhs, int n) {
+    int i = lhs-1;
+    for (int j = lhs; j < lhs+n; ++j) {
+        if (a[j] < a[lhs+n-1]) {
             swap(a[++i], a[j]); 
         }
     }
-    swap(a[++i], a[n-1]);
+    swap(a[++i], a[lhs+n-1]);
     return i;
 }
 
-int getMaxK(int *a, int n, int k) {
-    int mid = partition(a, n);
+int getMaxK(int lhs, int n, int k) {
+    int mid = partition(lhs, n);
     if (mid == n-k)
         return a[mid];
     else if (mid < n-k)
-        return getMaxK(a+mid+1, n-mid-1, k);
+        return getMaxK(lhs+mid+1, n-mid-1, k);
     else 
-        return getMaxK(a, mid, k-n+mid);
+        return getMaxK(lhs, mid, k-n+mid);
 }
 
-void quick_sort(int *a, int n) {
-    int 
-}
 
 int main() {
     int n, k;
@@ -45,13 +43,13 @@ int main() {
         int temp;
         scanf("%d", &temp);
         if (!flag[temp]) {
-            p[size++] = temp;
+            a[size++] = temp;
             flag[temp] = true;
         }
     }
-    quick_sort(a, size-1);
+    // cout << getMaxK(p, size, k)<<endl;
     if (k-1 >= 0 && k-1 < size) {
-      printf("%d\n", a[k-1]);
+      printf("%d\n", getMaxK(0, size, k));
     }
     return 0;
 }
